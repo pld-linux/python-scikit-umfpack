@@ -26,6 +26,7 @@ BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	python-numpy-devel
 BuildRequires:	python-setuptools
 %if %{with tests}
+BuildRequires:	python-nose
 BuildRequires:	python-scipy >= 1.0.0
 %endif
 %endif
@@ -34,6 +35,7 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-numpy-devel
 BuildRequires:	python3-setuptools
 %if %{with tests}
+BuildRequires:	python3-nose
 BuildRequires:	python3-scipy >= 1.0.0
 %endif
 %endif
