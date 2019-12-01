@@ -92,6 +92,9 @@ nosetests-%{py3_ver} scikits
 %install
 rm -rf $RPM_BUILD_ROOT
 
+export BLAS=%{_libdir}
+export UMFPACK=%{_libdir}
+
 %if %{with python2}
 %py_install
 # ensure scikits/__init__.py is compiled
