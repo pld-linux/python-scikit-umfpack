@@ -8,7 +8,7 @@ Summary:	Wrapper of UMFPACK sparse direct solver to SciPy
 Summary(pl.UTF-8):	Obudowanie procedur UMFPACK do rozwiązywania problemów na macierzach rzadkich dla SciPy
 Name:		python-scikit-umfpack
 Version:	0.3.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/scikit-umfpack/
