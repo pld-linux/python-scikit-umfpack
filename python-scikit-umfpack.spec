@@ -2,13 +2,13 @@
 # Conditional build:
 %bcond_without	tests	# unit tests
 %bcond_without	python2 # CPython 2.x module
-%bcond_without	python3 # CPython 3.x module
+%bcond_with	python3 # CPython 3.x module
 
 Summary:	Wrapper of UMFPACK sparse direct solver to SciPy
 Summary(pl.UTF-8):	Obudowanie procedur UMFPACK do rozwiązywania problemów na macierzach rzadkich dla SciPy
 Name:		python-scikit-umfpack
 Version:	0.3.2
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/scikit-umfpack/
@@ -18,6 +18,7 @@ URL:		https://pypi.org/project/scikit-umfpack/
 BuildRequires:	AMD-devel
 BuildRequires:	UMFPACK-devel
 BuildRequires:	blas-devel
+BuildRequires:	cblas-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	swig-python >= 2.0.4
@@ -70,21 +71,23 @@ problemów na macierzach rzadkich dla SciPy.
 %build
 export BLAS=%{_libdir}
 export UMFPACK=%{_libdir}
+export CFLAGS="%{rpmcflags} -I/usr/include/umfpack"
 
 %if %{with python2}
-%py_build %{?with_tests:test}
+%py_build
 
 %if %{with tests}
-PYTHONPATH=$(readlink -f build-2/lib.*) \
+PYTHONPATH=$(readlink -f build-2/lib.*)/scikits/umfpack \
 nosetests-%{py_ver} scikits
 %endif
+find scikits -name '*.pyc' -exec rm -f {} \;
 %endif
 
 %if %{with python3}
-%py3_build %{?with_tests:test}
+%py3_build
 
 %if %{with tests}
-PYTHONPATH=$(readlink -f build-3/lib.*) \
+PYTHONPATH=$(readlink -f build-3/lib.*)/scikits/umfpack \
 nosetests-%{py3_ver} scikits
 %endif
 %endif
